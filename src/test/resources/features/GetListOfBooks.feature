@@ -5,9 +5,8 @@ Feature: Fetch all books from the system
     When the user sends a "GET" request to the "/books" endpoint
     Then the response status code should be 200
     And the response header "Content-Type" should be "application/json; charset=utf-8"
-#    And the response body should contain a list of books
-#    And each book should have a name type and availability
-    And the response should have the following books information
+#    And the response should have the following books information using json path
+    And the response should have the following books information using pojo
       | bookId | bookName              | bookType    | bookAvailability |
       | 1      | The Russian           | fiction     | true             |
       | 2      | Just as I Am          | non-fiction | false            |

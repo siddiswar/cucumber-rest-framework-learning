@@ -69,7 +69,7 @@ public class Book {
         this.currentStock = currentStock;
     }
 
-    public boolean isAvailable() {
+    public boolean getAvailable() {
         return available;
     }
 

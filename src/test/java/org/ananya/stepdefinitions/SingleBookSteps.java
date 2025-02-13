@@ -14,7 +14,7 @@ public class SingleBookSteps {
     @Inject
     SharedContext sharedContext;
 
-    @And("the response should have the following single book information")
+    @And("the response should have the following single book information  using json path")
     public void theResponseShouldHaveTheFollowingSingleBookInformation(DataTable dataTable) {
         Map<String, String> expectedBook = dataTable.asMaps().get(0);
 

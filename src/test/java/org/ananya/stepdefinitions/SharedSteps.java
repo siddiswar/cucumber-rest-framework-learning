@@ -69,25 +69,6 @@ public class SharedSteps {
         assertEquals(actualResponseCode, expectedResponseCode);
     }
 
-    @Then("the response body should contain a list of books")
-    public void the_response_body_should_contain_a_list_of_books() {
-        List<Integer> actualIdList = sharedContext.getResponse().jsonPath().getList("id");
-        int expectedNumberOfBooks = 6;
-        int actualNumberOfBooks = actualIdList.size();
-        assertEquals(actualNumberOfBooks, expectedNumberOfBooks, "Actual NUmber of books not matching with expected number of books.");
-    }
-
-    @And("each book should have a name type and availability")
-    public void eachBookShouldHaveANameTypeAndAvailability() {
-        List<String> actualNameList = sharedContext.getResponse().jsonPath().getList("name");
-        List<String> actualTypeList = sharedContext.getResponse().jsonPath().getList("type");
-        List<Boolean> actualAvailableList = sharedContext.getResponse().jsonPath().getList("available");
-
-        assertEquals(actualNameList.size(), 6, "Book names missing");
-        assertEquals(actualTypeList.size(), 6, "Book types missing");
-        assertEquals(actualAvailableList.size(), 6, "Book availabilities missing");
-    }
-
     @And("the response header {string} should be {string}")
     public void theResponseHeaderShouldBe(String headerName, String expectedHeaderValue) {
         String actualHeaderValue = sharedContext.getResponse().getHeader(headerName);
