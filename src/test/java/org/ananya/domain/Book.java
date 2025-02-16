@@ -76,4 +76,18 @@ public class Book {
     public void setAvailable(boolean available) {
         this.available = available;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", isbn='" + isbn + '\'' +
+                ", type='" + type + '\'' +
+                ", price=" + price +
+                ", currentStock=" + currentStock +
+                ", available=" + available +
+                '}';
+    }
 }

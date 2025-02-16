@@ -24,5 +24,3 @@ public class PropertiesConfig {
         return properties.getProperty(propertyName);
     }
 }
-
-

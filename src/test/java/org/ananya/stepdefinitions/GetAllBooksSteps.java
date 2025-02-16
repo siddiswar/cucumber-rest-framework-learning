@@ -5,12 +5,16 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import org.ananya.domain.Book;
 import org.ananya.state.SharedContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 import java.util.Map;
 
 public class GetAllBooksSteps {
+
+    private static final Logger logger = LoggerFactory.getLogger(GetAllBooksSteps.class);
 
     @Inject
     SharedContext sharedContext;
@@ -54,11 +58,17 @@ public class GetAllBooksSteps {
 
         int expectedBookCount = expectedBooks.size();
 
+        logger.info("Expected total books: {}", expectedBookCount);
+        logger.info("Actual total books: {}", actualBooks.size());
+
         SoftAssert softAssert = new SoftAssert();
 
         //Run loop for expectedBookCount times
         for (int i = 0; i < expectedBookCount; i++) {
             Map<String, String> eachExpectedBook = expectedBooks.get(i);
+            logger.info("Verifying the book with number : {}", i);
+
+            logger.info("Expected book details : {}", eachExpectedBook);
 
             //Store expected values in variables
             int expectedBookId = Integer.parseInt(eachExpectedBook.get("bookId"));
@@ -67,6 +77,8 @@ public class GetAllBooksSteps {
             boolean expectedBookAvailability = Boolean.parseBoolean(eachExpectedBook.get("bookAvailability"));
 
             Book actualBook = actualBooks.get(i);
+            logger.info("Actual book details : {}", actualBook.toString());
+
             //Store actual values in variables
             int actualBookId = actualBook.getId();
             String actualBookName = actualBook.getName();
