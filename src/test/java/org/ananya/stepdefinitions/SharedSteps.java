@@ -8,34 +8,30 @@ import io.cucumber.java.en.When;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 
-import io.restassured.specification.RequestSpecification;
+import org.ananya.config.PropertiesConfig;
 import org.ananya.state.SharedContext;
-
-import java.util.List;
+import org.testng.Assert;
 
 import static org.testng.Assert.assertEquals;
 
 public class SharedSteps {
 
-
-    //Member variable
-    private static final String BASE_URL = "https://simple-books-api.glitch.me";
-    private static final String BEARER_TOKEN = "Bearer " + "58418a92313a728bf702413880c29ce02b1974d813e9ff739b4e68f67d77daa3";
+    //Member variables
     @Inject
     SharedContext sharedContext;
-
-    public static RequestSpecification request;
 
     @Given("the books api is available and operational")
     public void theBooksApiIsAvailableAndOperational() {
         sharedContext.getRequest().filter(new RequestLoggingFilter());
         sharedContext.getRequest().filter(new ResponseLoggingFilter());
-        sharedContext.getRequest().baseUri(BASE_URL);
+        String baseUrl = PropertiesConfig.getProperty("base_url");
+        sharedContext.getRequest().baseUri(baseUrl);
     }
 
     @And("the user is authorized")
     public void theUserIsAuthorized() {
-        sharedContext.getRequest().header("Authorization", BEARER_TOKEN);
+        String bearerToken = PropertiesConfig.getProperty("bearer_token");
+        sharedContext.getRequest().header("Authorization", bearerToken);
     }
 
     @When("the user sends a {string} request to the {string} endpoint")
@@ -72,8 +68,6 @@ public class SharedSteps {
     @And("the response header {string} should be {string}")
     public void theResponseHeaderShouldBe(String headerName, String expectedHeaderValue) {
         String actualHeaderValue = sharedContext.getResponse().getHeader(headerName);
-//        System.out.println(response.getContentType());
-//        Assert.assertEquals(actualHeaderValue, expectedHeaderValue);
-        assertEquals(actualHeaderValue, expectedHeaderValue, "Headers not matching.");
+        Assert.assertEquals(actualHeaderValue, expectedHeaderValue, "Headers not matching.");
     }
 }
