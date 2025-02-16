@@ -3,24 +3,20 @@ package org.ananya.stepdefinitions;
 import com.google.inject.Inject;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
 import org.ananya.domain.Book;
 import org.ananya.state.SharedContext;
 import org.testng.asserts.SoftAssert;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static org.testng.Assert.assertEquals;
-
-public class ListOfBooksSteps {
+public class GetAllBooksSteps {
 
     @Inject
     SharedContext sharedContext;
 
-    @And("the response should have the following books information using json path")
-    public void theResponseShouldHaveTheFollowingBooksInformationUsingJsonPath(DataTable dataTable) {
+    @And("the response should have the following books information")
+    public void theResponseShouldHaveTheFollowingBooksInformation(DataTable dataTable) {
         List<Map<String, String>> expectedBooks = dataTable.asMaps();
         int expectedBookCount = expectedBooks.size();
 
@@ -54,7 +50,7 @@ public class ListOfBooksSteps {
     @And("the response should have the following books information using pojo")
     public void theResponseShouldHaveTheFollowingBooksInformationUsingPojo(DataTable dataTable) {
         List<Map<String, String>> expectedBooks = dataTable.asMaps();
-        List<Book> actualBooks = sharedContext.getResponse().as(List.class);
+        List<Book> actualBooks = sharedContext.getResponse().jsonPath().getList("", Book.class);
 
         int expectedBookCount = expectedBooks.size();
 

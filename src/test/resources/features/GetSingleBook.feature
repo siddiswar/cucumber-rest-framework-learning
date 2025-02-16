@@ -17,7 +17,6 @@ Feature: Fetch a book with give book id
     When the user sends a "GET" request to the "/books/<bookId>" endpoint
     Then the response status code should be 200
     And the response header "Content-Type" should be "application/json; charset=utf-8"
-#    And the response should have the following single book information  using json path
     And the response should have the following single book information using pojo
       | bookId   | bookName   | bookAuthor   | bookIsbn   | bookType   | bookPrice   | bookCurrentStock   | bookAvailability   |
       | <bookId> | <bookName> | <bookAuthor> | <bookIsbn> | <bookType> | <bookPrice> | <bookCurrentStock> | <bookAvailability> |

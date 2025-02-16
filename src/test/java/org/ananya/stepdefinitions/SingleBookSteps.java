@@ -14,7 +14,7 @@ public class SingleBookSteps {
     @Inject
     SharedContext sharedContext;
 
-    @And("the response should have the following single book information  using json path")
+    @And("the response should have the following single book information")
     public void theResponseShouldHaveTheFollowingSingleBookInformation(DataTable dataTable) {
         Map<String, String> expectedBook = dataTable.asMaps().get(0);
 
@@ -75,7 +75,7 @@ public class SingleBookSteps {
         //Store actual values in variables
         // Response is deserialized into POJO (Java Object)
         // Joackson library converts (deserialization) Json string into pojo object
-        Book actualBook = sharedContext.getResponse().as(Book.class);
+        Book actualBook = sharedContext.getResponse().jsonPath().getObject("", Book.class);
         int actualBookId = actualBook.getId();
         String actualBookName = actualBook.getName();
         String actualBookAuthor = actualBook.getAuthor();
